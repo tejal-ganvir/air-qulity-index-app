@@ -28,4 +28,12 @@ const concatData = (olddata, latestdata) =>{
     return [];
 }
 
-export {concatData, sortCity};
+const divideArray = (array) =>{
+    let middle = Math.ceil(array.length / 2);
+    let first = array.slice(0, middle);
+    let second = array.slice(middle);
+    
+    return [first, second];
+}
+
+export {concatData, sortCity, divideArray};

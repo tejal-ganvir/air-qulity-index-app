@@ -21,10 +21,8 @@ body {
 
 .footer {
   background-color: #f8f9fa;
-  position: fixed;
-  width: 100%;
-  text-align: center;
-  bottom: 0;
+  clear: both;
+  position: relative;
   color: #6c757d;
   font-size: 18px;
  }

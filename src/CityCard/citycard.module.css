@@ -1,0 +1,18 @@
+.text_good{
+    color: rgb(7, 133, 7);
+}
+.text_satisfactory{
+    color: rgb(37, 187, 37);
+}
+.text_moderate{
+    color: rgb(229, 245, 2);
+}
+.text_poor{
+    color: rgb(252, 131, 18);
+}
+.text_verypoor{
+    color: rgb(252, 65, 18);
+}
+.text_sever{
+    color: rgb(177, 42, 8);
+}

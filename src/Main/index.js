@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import Header from './Header';
 import Footer from './Footer';
+import CityCard from '../CityCard';
 import useWebSocket from 'react-use-websocket';
-import { concatData } from '../utilies/helpers';
+import { concatData, divideArray } from '../utilies/helpers';
+import { Row, Col } from 'react-bootstrap';
+import AllChart from './AllChart';
 
 /**
 * @author
@@ -32,7 +35,7 @@ const Main = (props) => {
     if(readyState === 1){
 
       setCitiesData((olddata) => concatData(olddata, lastJsonMessage));
-
+      
       setData((currentData) => {
         if(currentData.length >= dataLimit)
         {
@@ -42,31 +45,32 @@ const Main = (props) => {
       })
     }
 
-  },[lastJsonMessage])
+  },[lastJsonMessage]);
+
+  const viewArray = divideArray(citiesData);
 
   return(
     <React.Fragment>
       <Header />
       <div className="m-4">
-        <table border="1" width="100%">
-          <tr>
-            {
-              (citiesData.length > 0) ? citiesData.map((item, idx) => {
-                return(
-                  <td key={`cities-${idx}`}>
-                    {item.city}
-                    <p>{item.aqi}</p>
-                  </td>
-                )
-              }) 
-              :
-              'loading....'
-            }
-          </tr>
-        </table>
-      </div>
-      <Footer />
+      <Row>
+        <Col xs={{ span: 12, order: 2 }} md={{ span: 3, order: 1 }}>
+          { viewArray[0] && viewArray[0].map((val,idx) => (
+            <CityCard {...val} key={`city0-${idx}`} />
+          ))}
+        </Col>
 
+        <Col xs={{ span: 12, order: 1 }} md={{ span: 6, order: 2 }}>
+            <AllChart data={citiesData} />
+        </Col>
+
+        <Col xs={{ span: 12, order: 3 }} md={{ span: 3, order: 3 }}>
+          { viewArray[1] && viewArray[1].map((val,idx) => (
+            <CityCard {...val} key={`city1-${idx}`} />
+          ))}
+        </Col>
+      </Row>
+      </div>
     </React.Fragment>
    )
 
